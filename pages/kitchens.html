@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تصميم المطابخ - هدير الأشياء الذكية </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        /* Hamburger Menu Animation */
+        .hamburger-menu {
+            width: 20px;
+            height: 15px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .hamburger-line {
+            display: block;
+            height: 2px;
+            width: 100%;
+            background: #374151;
+            border-radius: 1px;
+            position: absolute;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger-line:nth-child(1) {
+            top: 0;
+        }
+
+        .hamburger-line:nth-child(2) {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .hamburger-line:nth-child(3) {
+            bottom: 0;
+        }
+
+        .hamburger-menu.active .hamburger-line:nth-child(1) {
+            transform: rotate(45deg);
+            top: 50%;
+        }
+
+        .hamburger-menu.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-menu.active .hamburger-line:nth-child(3) {
+            transform: rotate(-45deg);
+            bottom: 50%;
+        }
+
+
+        /* General Styles from original index.html */
+        .gradient-text {
+            background: linear-gradient(135deg, #f59e0b, #ea580c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .purple-gradient-text {
+            background: linear-gradient(135deg, #f59e0b, #ea580c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .amber-gradient-text {
+            background: linear-gradient(135deg, #f59e0b, #ea580c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            visibility: visible;
+            max-height: 500px;
+        }
+
+        .mobile-dropdown-content.active {
+            max-height: 200px;
+        }
+
+        .navbar-scrolled {
+            background: rgba(255, 255, 255, 0.98) !important;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Custom styles for this page */
+        .decor-pattern {
+            background-image:
+                radial-gradient(circle at 25% 75%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 25%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+        }
+
+        /* Floating Animation */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            33% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+
+            66% {
+                transform: translateY(-10px) rotate(-5deg);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed w-full top-0 z-50 bg-white/95 backdrop-blur-lg shadow-lg transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <a href="../index.html" class="flex items-center space-x-2 space-x-reverse  group">
+                    <div
+                        class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110 floating">
+                        <i class="fas fa-home-heart text-white text-lg sm:text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl sm:text-2xl font-bold gradient-text">هدير</span>
+                        <div class="text-xs text-gray-500 font-medium "> الأشياء الذكية</div>
+                    </div>
+                </a>
+                <div class="hidden lg:flex items-center space-x-8 space-x-reverse">
+                    <a href="../index.html"
+                        class="text-gray-700 hover:text-amber-600 font-medium transition-all duration-300 relative group px-2 py-1">
+                        الرئيسية
+                        <span
+                            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <div class="relative group">
+                        <button
+                            class="text-gray-700 hover:text-amber-600 font-medium transition-all duration-300 flex items-center px-2 py-1">
+                            الأقسام
+                            <i
+                                class="fas fa-chevron-down mr-2 text-sm transition-transform duration-300 group-hover:rotate-180"></i>
+                        </button>
+                        <div
+                            class="absolute top-full right-0 mt-2 w-64 bg-white rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 border border-gray-100">
+                            <div class="p-2">
+                                <a href="kitchens.html"
+                                    class="flex items-center p-4 rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 transition-all duration-300 group/item">
+                                    <div
+                                        class="w-10 h-10 bg-gradient-to-br from-amber-100 to-orange-100 rounded-lg flex items-center justify-center ml-3 group-hover/item:scale-110 transition-transform duration-300">
+                                        <i class="fas fa-utensils text-amber-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold text-gray-800">تصميم المطابخ</div>
+                                        <div class="text-sm text-gray-500">مطابخ عصرية وعملية</div>
+                                    </div>
+                                </a>
+                                <a href="dicor.html"
+                                    class="flex items-center p-4 rounded-xl  hover:bg-gradient-to-r hover:from-purple-50  hover:to-pink-50 transition-all duration-300 group/item">
+                                    <div
+                                        class="w-10 h-10 bg-gradient-to-br from-purple-100 to-pink-100 rounded-lg flex items-center justify-center ml-3">
+                                        <i class="fas fa-palette text-purple-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold text-gray-800">الديكورات المنزلية</div>
+                                        <div class="text-sm text-gray-500">تصاميم داخلية أنيقة</div>
+                                    </div>
+                                </a>
+                                <a href="#"
+                                    class="flex items-center p-4 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-cyan-50 transition-all duration-300 group/item">
+                                    <div
+                                        class="w-10 h-10 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-lg flex items-center justify-center ml-3 group-hover/item:scale-110 transition-transform duration-300">
+                                        <i class="fas fa-home text-blue-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold text-gray-800">الأشياء الذكية</div>
+                                        <div class="text-sm text-gray-500">تقنيات منزلية حديثة</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <a href="../index.html#services"
+                        class="text-gray-700 hover:text-amber-600 font-medium transition-all duration-300 relative group px-2 py-1">
+                        خدماتنا
+                        <span
+                            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#gallery"
+                        class="text-gray-700 hover:text-amber-600 font-medium transition-all duration-300 relative group px-2 py-1">
+                        معرض الأعمال
+                        <span
+                            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="../index.html#about"
+                        class="text-gray-700 hover:text-amber-600 font-medium transition-all duration-300 relative group px-2 py-1">
+                        من نحن
+                        <span
+                            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="../index.html#team"
+                        class="text-gray-700 hover:text-amber-600 font-medium transition-all duration-300 relative group px-2 py-1">
+                        فريق العمل
+                        <span
+                            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="../index.html#faq"
+                        class="text-gray-700 hover:text-amber-600 font-medium transition-all duration-300 relative group px-2 py-1">
+                        الأسئلة الشائعة
+                        <span
+                            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="../index.html#contact"
+                        class="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 hover-lift">
+                        <i class="fas fa-phone ml-2"></i>
+                        تواصل معنا
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button
+                    class="lg:hidden w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors duration-300 p-2"
+                    onclick="toggleMobileMenu()">
+                    <div class="hamburger-menu">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div class="lg:hidden mobile-menu opacity-0 invisible max-h-0 overflow-hidden transition-all duration-300 bg-white rounded-b-2xl shadow-lg"
+                id="mobileMenu">
+                <div class="p-3 sm:p-4 space-y-1 sm:space-y-2">
+                    <a href="../index.html"
+                        class="block px-4 py-3 text-gray-700 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-all duration-300">
+                        <i class="fas fa-home ml-3 w-5 text-amber-500"></i>
+                        الرئيسية
+                    </a>
+
+                    <!-- Mobile Services -->
+                    <div class="mobile-dropdown">
+                        <button
+                            class="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-all duration-300"
+                            onclick="toggleMobileDropdown()">
+                            <span>
+                                <i class="fas fa-cogs ml-3 w-5 text-amber-500"></i>
+                                الأقسام
+                            </span>
+                            <i class="fas fa-chevron-down transition-transform duration-300" id="dropdownIcon"></i>
+                        </button>
+                        <div class="mobile-dropdown-content max-h-0 overflow-hidden transition-all duration-300"
+                            id="mobileDropdown">
+                            <div class="pr-8 space-y-1 mt-2">
+                                <a href="kitchens.html"
+                                    class="block px-4 py-2 text-gray-600 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-all duration-300">
+                                    <i class="fas fa-utensils ml-2 text-amber-600"></i>
+                                    تصميم المطابخ
+                                </a>
+                                <a href="dicor.html"
+                                    class="block px-4 py-2 text-gray-600 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-all duration-300">
+                                    <i class="fas fa-palette ml-2 text-purple-600"></i>
+                                    الديكورات المنزلية
+                                </a>
+                                <a href="#"
+                                    class="block px-4 py-2 text-gray-600 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-all duration-300">
+                                    <i class="fas fa-home ml-2 text-blue-600"></i>
+                                    الأشياء الذكية
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="../index.html#services"
+                        class="block px-4 py-3 text-gray-700 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-all duration-300">
+                        <i class="fas fa-cogs ml-3 w-5 text-amber-500"></i>
+                        خدماتنا
+                    </a>
+                    <a href="#gallery"
+                        class="block px-4 py-3 text-gray-700 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-all duration-300">
+                        <i class="fas fa-images ml-3 w-5 text-amber-500"></i>
+                        معرض الأعمال
+                    </a>
+                    <a href="../index.html#about"
+                        class="block px-4 py-3 text-gray-700 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-all duration-300">
+                        <i class="fas fa-info-circle ml-3 w-5 text-amber-500"></i>
+                        من نحن
+                    </a>
+                    <a href="../index.html#team"
+                        class="block px-4 py-3 text-gray-700 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-all duration-300">
+                        <i class="fas fa-users ml-3 w-5 text-amber-500"></i>
+                        فريق العمل
+                    </a>
+                    <a href="../index.html#faq"
+                        class="block px-4 py-3 text-gray-700 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-all duration-300">
+                        <i class="fas fa-star ml-3 w-5 text-amber-500"></i>
+                        الأسئلة الشائعة
+                    </a>
+                    <a href="../index.html#contact"
+                        class="block mx-4 mt-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-3 rounded-full font-semibold text-center hover:shadow-lg transition-all duration-300">
+                        <i class="fas fa-phone ml-2"></i>
+                        تواصل معنا
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section id="home"
+        class="relative min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 overflow-hidden hero-pattern">
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div
+                class="absolute top-10 sm:top-20 left-5 sm:left-20 w-48 sm:w-72 h-48 sm:h-72 bg-gradient-to-br from-amber-300 to-orange-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 floating-element">
+            </div>
+            <div class="absolute top-20 sm:top-40 right-5 sm:right-20 w-64 sm:w-96 h-64 sm:h-96 bg-gradient-to-br from-orange-300 to-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 floating-element"
+                style="animation-delay: 2s;"></div>
+            <div class="absolute bottom-10 sm:bottom-20 left-1/2 w-56 sm:w-80 h-56 sm:h-80 bg-gradient-to-br from-yellow-300 to-amber-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 floating-element"
+                style="animation-delay: 4s;"></div>
+        </div>
+
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-screen py-16 sm:py-20">
+                <!-- Content Section -->
+                <div class="space-y-8 mt-3 fade-in-up">
+                    <!-- Premium Badge -->
+
+                    <div
+                        class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-amber-100 to-orange-100 rounded-full border border-amber-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                        <div class="w-2 h-2 bg-amber-500 rounded-full animate-pulse ml-3"></div>
+                        <i class="fas fa-star text-amber-500 ml-2"></i>
+                        <span class="text-amber-700 font-bold text-sm">تصاميم مطابخ أنيقة</span>
+                        <i class="fas fa-crown text-amber-600 mr-2"></i>
+                    </div>
+                    <nav class="flex items-center space-x-2 space-x-reverse text-sm">
+                        <a href="../index.html" class="text-gray-500 hover:text-amber-600">الرئيسية</a>
+                        <i class="fas fa-chevron-left text-gray-400"></i>
+                        <a href="../index.html#services" class="text-gray-500 hover:text-amber-600">الخدمات</a>
+                        <i class="fas fa-chevron-left text-gray-400"></i>
+                        <span class="text-amber-600 font-semibold">تصميم المطابخ</span>
+                    </nav>
+                    <!-- Main Title with Enhanced Typography -->
+                    <div class="space-y-3 sm:space-y-4">
+                        <h1 class="text-3xl sm:text-4xl md:text-5xl   lg:text-6xl xl:text-7xl font-black leading-tight">
+                            <span class="gradient-text  mb-1 p-1 sm:mb-2">المطابخ</span>
+
+
+                        </h1>
+
+                        <!-- Decorative Line -->
+                        <div
+                            class="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full">
+                        </div>
+                    </div>
+
+                    <!-- Enhanced Subtitle -->
+                    <p class="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl">
+                        نصمم مطابخ عصرية تجمع بين الجمال والوظائف العملية، مع استخدام أحدث التقنيات والمواد عالية
+                        الجودة.
+                        <span class="font-semibold text-amber-700">مطابخ تلبي احتياجاتك اليومية </span>
+                        وتعكس ذوقك الرفيع.
+
+                    </p>
+
+                    <!-- Enhanced Stats with Icons -->
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div class="flex items-center space-x-3 space-x-reverse">
+                            <div
+                                class="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-500 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-cube text-white"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-800">تصميم ثلاثي الأبعاد</div>
+                                <div class="text-sm text-gray-600">رؤية واضحة قبل التنفيذ</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3 space-x-reverse">
+                            <div
+                                class="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-gem text-white"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-800">مواد عالية الجودة</div>
+                                <div class="text-sm text-gray-600">ضمان طويل المدى</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3 space-x-reverse">
+                            <div
+                                class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-tools text-white"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-800">تنفيذ احترافي</div>
+                                <div class="text-sm text-gray-600">فريق متخصص</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3 space-x-reverse">
+                            <div
+                                class="w-10 h-10 bg-gradient-to-br from-red-500 to-pink-500 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-clock text-white"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-800">تسليم في الوقت</div>
+                                <div class="text-sm text-gray-600">التزام بالمواعيد</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Enhanced Action Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                        <a href="#gallery"
+                            class="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300 group relative overflow-hidden text-sm sm:text-base">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-r from-orange-500 to-amber-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            </div>
+                            <i
+                                class="fas fa-images ml-2 group-hover:scale-110 transition-transform duration-300 relative z-10"></i>
+                            <span class="relative z-10">شاهد المشاريع</span>
+
+                        </a>
+                        <a href="pages/services.html"
+                            class="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 border-2 border-amber-500 text-amber-600 font-bold rounded-full hover:bg-amber-500 hover:text-white transition-all duration-300 group hover:shadow-lg text-sm sm:text-base">
+                            <i
+                                class="fas fa-info-circle ml-2 group-hover:scale-110 transition-transform duration-300"></i>
+                            <span class="hidden sm:inline">اطلب استشارة مجانية</span>
+                            <span class="sm:hidden">استشارة</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Enhanced Image Section -->
+                <div class="relative fade-in-up mt-8 lg:mt-0" style="animation-delay: 0.3s;">
+                    <div
+                        class="relative bg-white rounded-2xl sm:rounded-3xl shadow-2xl p-3 sm:p-6 hover:shadow-3xl transition-all duration-500 hover-lift">
+                        <img src="https://cdn.pixabay.com/photo/2016/11/18/17/46/house-1836070_1280.jpg"
+                            alt="تصميم مطابخ عصرية"
+                            class="w-full h-64 sm:h-80 lg:h-96 object-cover rounded-xl sm:rounded-2xl"
+                            onerror="this.src='../assets/images/decor-fallback.jpg'">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-xl sm:rounded-2xl">
+                        </div>
+                        <div class="absolute bottom-4 sm:bottom-6 left-4 sm:left-8 text-white">
+                            <h3 class="text-lg sm:text-xl font-bold">تصميم مطابخ عصرية</h3>
+                            <p class="text-xs sm:text-sm opacity-90"> تصاميم مفتوحة وواسعة</p>
+                        </div>
+                        <div
+                            class="absolute -top-8 -right-8 w-24 h-24 bg-gradient-to-br from-amber-400 to-orange-400 rounded-full opacity-20 floating-element">
+                        </div>
+                        <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-gradient-to-br from-orange-400 to-yellow-400 rounded-full opacity-20 floating-element"
+                            style="animation-delay: 1s;"></div>
+                        <div class="absolute top-1/2 -left-12 w-16 h-16 bg-gradient-to-br from-yellow-400 to-amber-400 rounded-full opacity-30 floating-element"
+                            style="animation-delay: 3s;"></div>
+                        <div
+                            class="absolute -top-3 -right-3 w-6 h-6 bg-gradient-to-br from-amber-400 to-orange-400 rounded-full">
+                        </div>
+                        <div
+                            class="absolute -bottom-3 -left-3 w-8 h-8 bg-gradient-to-br from-pink-400 to-rose-400 rounded-full">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </section>
+
+
+    <!-- Kitchen Types Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <div
+                    class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-amber-100 to-orange-100 rounded-full border border-amber-200 shadow-lg mb-6">
+                    <i class="fas fa-utensils text-amber-600 ml-2"></i>
+                    <span class="text-amber-700 font-bold text-sm">أنواع المطابخ</span>
+                </div>
+                <h2 class="text-4xl lg:text-5xl font-black text-gray-800 mb-4">
+                    اختر النوع الذي <span class="gradient-text">يناسبك</span>
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    نقدم تشكيلة متنوعة من تصاميم المطابخ لتناسب جميع الأذواق والمساحات
+                </p>
+            </div>
+
+            <!-- Kitchen Types Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Modern Kitchen -->
+                <div
+                    class="group bg-gradient-to-br from-white to-gray-50 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 border border-gray-100">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                        <i class="fas fa-laptop text-white text-2xl"></i>
+                    </div>
+                    <h3
+                        class="text-2xl font-bold text-gray-800 mb-4 group-hover:text-blue-600 transition-colors duration-300">
+                        المطبخ العصري</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">تصميم حديث بخطوط نظيفة وألوان عصرية مع أحدث التقنيات
+                        والأجهزة الذكية</p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-blue-500 ml-2"></i>
+                            خطوط مستقيمة ونظيفة
+                        </li>
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-blue-500 ml-2"></i>
+                            ألوان محايدة وعصرية
+                        </li>
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-blue-500 ml-2"></i>
+                            أجهزة ذكية متطورة
+                        </li>
+                    </ul>
+                    <a href="../index.html#contact"
+                        class="block w-full text-center bg-blue-500 text-white py-3 rounded-xl font-semibold hover:bg-blue-600 transition-colors duration-300">
+                        اطلب الآن
+                    </a>
+                </div>
+
+                <!-- Classic Kitchen -->
+                <div
+                    class="group bg-gradient-to-br from-white to-amber-50 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 border border-amber-100">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                        <i class="fas fa-crown text-white text-2xl"></i>
+                    </div>
+                    <h3
+                        class="text-2xl font-bold text-gray-800 mb-4 group-hover:text-amber-600 transition-colors duration-300">
+                        المطبخ الكلاسيكي</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">تصميم أنيق بلمسة تراثية مع استخدام الخشب الطبيعي
+                        والتفاصيل المنحوتة</p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-amber-500 ml-2"></i>
+                            خشب طبيعي عالي الجودة
+                        </li>
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-amber-500 ml-2"></i>
+                            تفاصيل منحوتة يدوياً
+                        </li>
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-amber-500 ml-2"></i>
+                            ألوان دافئة وأنيقة
+                        </li>
+                    </ul>
+                    <a href="../index.html#contact"
+                        class="block w-full text-center bg-amber-500 text-white py-3 rounded-xl font-semibold hover:bg-amber-600 transition-colors duration-300">
+                        اطلب الآن
+                    </a>
+                </div>
+
+                <!-- Minimalist Kitchen -->
+                <div
+                    class="group bg-gradient-to-br from-white to-green-50 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 border border-green-100 md:col-span-2 lg:col-span-1">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                        <i class="fas fa-leaf text-white text-2xl"></i>
+                    </div>
+                    <h3
+                        class="text-2xl font-bold text-gray-800 mb-4 group-hover:text-green-600 transition-colors duration-300">
+                        المطبخ البسيط</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">تصميم مينيماليستي يركز على البساطة والوظائف العملية مع
+                        مساحات تخزين ذكية</p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 ml-2"></i>
+                            تصميم بسيط وعملي
+                        </li>
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 ml-2"></i>
+                            مساحات تخزين ذكية
+                        </li>
+                        <li class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 ml-2"></i>
+                            سهولة في التنظيف
+                        </li>
+                    </ul>
+                    <a href="../index.html#contact"
+                        class="block w-full text-center bg-green-500 text-white py-3 rounded-xl font-semibold hover:bg-green-600 transition-colors duration-300">
+                        اطلب الآن
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 fade-in-up">
+                    <div
+                        class="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-amber-100 to-orange-100 rounded-full border border-amber-200 shadow-lg mb-4 sm:mb-6">
+                        <span class="text-amber-700 font-bold text-xs sm:text-sm"> سر تميزنا</span>
+                        <i class="fas fa-crown text-amber-600 ms-2 text-sm sm:text-base"></i>
+                    </div>
+                    <div class="space-y-8">
+                        <h2 class="text-3xl gradient-text md:text-4xl font-bold text-gray-800 p-1 mb-4">لماذا تختار
+                            مطابخنا ؟</h2>
+
+                        <div class="space-y-6">
+                            <p class="text-lg text-gray-600 leading-relaxed">
+                                نقدم تصاميم مطابخ عصرية تجمع بين الأناقة والوظائف العملية، مع استخدام أحدث التقنيات
+                                والمواد عالية الجودة لضمان مطبخ يدوم لسنوات طويلة.
+
+                            </p>
+
+                            <h4 class="text-2xl font-semibold text-gray-800 mt-8">أنواع المطابخ التي نقدمها:</h4>
+                            <div class="grid md:grid-cols-2 gap-6 mt-6">
+                                <div
+                                    class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-500  rounded-xl flex items-center justify-center shadow-lg 
+                                    group-hover:scale-110 group-hover:rotate-3 transition-all duration-500  mb-4">
+                                        <i class="fas fa-couch text-white text-xl"></i>
+                                    </div>
+                                    <h5 class="text-xl font-semibold text-gray-800 mb-3">
+                                        المطابخ المفتوحة
+                                    </h5>
+                                    <p class="text-gray-600">
+                                        تصاميم مفتوحة على الصالة تخلق مساحة واسعة ومريحة للعائلة
+
+                                    </p>
+                                </div>
+
+                                <div
+                                    class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+                                    <div
+                                        class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mb-4">
+                                        <i class="fas fa-bed text-white text-xl"></i>
+                                    </div>
+                                    <h5 class="text-xl font-semibold text-gray-800 mb-3">
+                                        المطابخ المغلقة </h5>
+                                    <p class="text-gray-600">
+                                        تصاميم تقليدية منفصلة توفر الخصوصية والتركيز أثناء الطبخ
+
+
+                                    </p>
+                                </div>
+
+                                <div
+                                    class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+                                    <div
+                                        class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mb-4">
+                                        <i class="fas fa-lightbulb text-white text-xl"></i>
+                                    </div>
+                                    <h5 class="text-xl font-semibold text-gray-800 mb-3">المطابخ الصغيرة</h5>
+                                    <p class="text-gray-600">حلول ذكية للمساحات المحدودة مع استغلال أمثل لكل سنتيمتر</p>
+                                </div>
+
+                                <div
+                                    class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+                                    <div
+                                        class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mb-4">
+                                        <i class="fas fa-paint-brush text-white text-xl"></i>
+                                    </div>
+                                    <h5 class="text-xl font-semibold text-gray-800 mb-3"> المطابخ الكبيرة</h5>
+                                    <p class="text-gray-600"> تصاميم فاخرة للمساحات الواسعة مع جزر وسطية ومناطق متعددة
+                                    </p>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-1 fade-in-up">
+                    <div class="space-y-6">
+                        <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
+                            <h5 class="text-xl font-bold text-gray-800 mb-4">احصل على استشارة مجانية</h5>
+                            <p class="text-gray-600 mb-6">تواصل معنا الآن للحصول على تصميم مجاني لمطبخك</p>
+                            <div class="space-y-3">
+                                <a href="https://wa.me/+966530040180"
+                                    class="flex items-center justify-center w-full bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105">
+                                    <i class="fab fa-whatsapp ml-2"></i>
+                                    واتساب
+                                </a>
+                                <a href="tel:+966530040180"
+                                    class="flex items-center justify-center w-full bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105">
+                                    <i class="fas fa-phone ml-2"></i>
+                                    اتصل الآن
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
+                            <h5 class="text-xl font-bold text-gray-800 mb-4">ما يميز خدمتنا</h5>
+                            <ul class="space-y-3">
+                                <li class="flex items-center">
+                                    <i class="fas fa-clock text-amber-600 ml-3 w-5"></i>
+                                    <span class="text-gray-700"> تسليم خلال 4-6 أسابيع </span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-eye text-amber-600 ml-3 w-5"></i>
+                                    <span class="text-gray-700"> تركيب احترافي و تصميم ثلاثي الأبعاد</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-shield-alt text-amber-600 ml-3 w-5"></i>
+                                    <span class="text-gray-700">ضمان سنتين</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-users text-amber-600 ml-3 w-5"></i>
+                                    <span class="text-gray-700">فريق متخصص</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-palette text-amber-600 ml-3 w-5"></i>
+                                    <span class="text-gray-700">تصاميم مخصصة</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
+                            <h5 class="text-xl font-bold text-gray-800 mb-4">نطاق الأسعار</h5>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-medium text-gray-700"> مطابخ اقتصادية</span>
+                                    <span class="font-bold purple-gradient-text">15,000 - 25,000 ريال </span>
+                                </div>
+                                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-medium text-gray-700"> مطابخ متوسطة</span>
+                                    <span class="font-bold purple-gradient-text">25,000 - 45,000 ريال</span>
+                                </div>
+                                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-medium text-gray-700">مطابخ فاخرة </span>
+                                    <span class="font-bold purple-gradient-text">45,000+ ريال</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-4">* الأسعار تختلف حسب المساحة والمواد المختارة</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Gallery Section -->
+    <section id="projects" class="py-20 bg-white relative overflow-hidden">
+        <div class="container mx-auto px-4 lg:px-8 relative z-10">
+            <div class="text-center mb-16 fade-in-up">
+                <div
+                    class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-amber-100 to-orange-100 rounded-full border border-purple-200 shadow-lg mb-6">
+                    <span class="text-amber-700 font-bold text-sm">أعمالنا</span>
+                    <i class="fas fa-images text-amber-600 ms-2"></i>
+                </div>
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6">
+                    <span class="purple-gradient-text">معرض</span>
+                    <span class="text-gray-800 block text-3xl md:text-4xl lg:text-5xl font-bold mt-2">المطابخ</span>
+                </h2>
+                <div
+                    class="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mb-4 sm:mb-6">
+                </div>
+                <p class="text-lg md:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+                    شاهد مجموعة من أفضل تصاميم المطابخ التي نفذناها
+
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="decor-gallery">
+                <div class="gallery-item fade-in-up" style="animation-delay: 0.1s;">
+                    <div
+                        class="group relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                        <div class="relative overflow-hidden">
+                            <img src="https://cdn.pixabay.com/photo/2016/11/18/17/46/house-1836070_1280.jpg"
+                                alt="مطبخ عصري "
+                                class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                <div class="absolute bottom-4 left-4 right-4 text-white">
+                                    <span
+                                        class="inline-block px-3 py-1 bg-purple-500 rounded-full text-xs font-semibold mb-2">
+                                        عصري</span>
+                                    <h5 class="text-lg font-bold mb-2"> مطبخ عصري أنيق </h5>
+                                    <p class="text-sm opacity-90 mb-4"> تصميم حديث بألوان محايدة
+
+                                        .</p>
+                                    <div class="flex gap-2">
+                                        <button
+                                            class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-colors duration-300"
+                                            onclick="openImageModal('https://cdn.pixabay.com/photo/2016/11/18/17/46/house-1836070_1280.jpg')">
+                                            <i class="fas fa-expand-alt text-white text-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in-up" style="animation-delay: 0.2s;">
+                    <div
+                        class="group relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                        <div class="relative overflow-hidden">
+                            <img src="https://cdn.pixabay.com/photo/2017/09/09/18/25/living-room-2732939_1280.jpg"
+                                alt="كلاسيكي "
+                                class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                <div class="absolute bottom-4 left-4 right-4 text-white">
+                                    <span
+                                        class="inline-block px-3 py-1 bg-indigo-500 rounded-full text-xs font-semibold mb-2">
+                                        كلاسيكي</span>
+                                    <h5 class="text-lg font-bold mb-2"> مطبخ كلاسيكي فاخر </h5>
+                                    <p class="text-sm opacity-90 mb-4">خشب طبيعي مع تفاصيل منحوتة</p>
+                                    <div class="flex gap-2">
+                                        <button
+                                            class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-colors duration-300"
+                                            onclick="openImageModal('https://cdn.pixabay.com/photo/2017/09/09/18/25/living-room-2732939_1280.jpg')">
+                                            <i class="fas fa-expand-alt text-white text-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in-up" style="animation-delay: 0.3s;">
+                    <div
+                        class="group relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                        <div class="relative overflow-hidden">
+                            <img src="https://cdn.pixabay.com/photo/2016/11/29/09/38/adult-1868750_1280.jpg"
+                                alt="مطبخ مينيمال"
+                                class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                <div class="absolute bottom-4 left-4 right-4 text-white">
+                                    <span
+                                        class="inline-block px-3 py-1 bg-rose-500 rounded-full text-xs font-semibold mb-2">مينيمال</span>
+                                    <h5 class="text-lg font-bold mb-2"> مطبخ بسيط وعملي</h5>
+                                    <p class="text-sm opacity-90 mb-4"> تصميم مينيمال مع تخزين ذكي
+                                    </p>
+                                    <div class="flex gap-2">
+                                        <button
+                                            class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-colors duration-300"
+                                            onclick="openImageModal('https://cdn.pixabay.com/photo/2016/11/29/09/38/adult-1868750_1280.jpg')">
+                                            <i class="fas fa-expand-alt text-white text-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="text-center mt-12">
+            <a href="../index.html#gallery"
+                class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                <i class="fas fa-images ml-2"></i>
+                شاهد المزيد من الأعمال
+            </a>
+        </div>
+        <div id="imageModal"
+            class="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center opacity-0 invisible transition-all duration-300">
+            <div class="relative max-w-4xl max-h-[90vh] mx-4">
+                <button
+                    class="absolute -top-12 right-0 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors duration-300"
+                    onclick="closeImageModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <img id="modalImage" src="" alt="" class="max-w-full max-h-full object-contain rounded-2xl shadow-2xl">
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="py-20 bg-white relative overflow-hidden">
+        <div class="container mx-auto px-4 lg:px-8 relative z-10">
+            <div class="text-center mb-16 fade-in-up">
+                <div
+                    class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-amber-100 to-orange-100 rounded-full border border-purple-200 shadow-lg mb-6">
+                    <span class="text-amber-700 font-bold text-sm">منهجية العمل</span>
+                    <i class="fas fa-hammer text-amber-600 ms-2"></i>
+                </div>
+
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6">
+                    <span class="purple-gradient-text"> مراحل </span>
+                    <span class="text-gray-800 block text-3xl md:text-4xl lg:text-5xl font-bold mt-2">تنفيذ
+                        المطابخ</span>
+                </h2>
+
+                <div
+                    class="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mb-4 sm:mb-6">
+                </div>
+                <p class="text-lg md:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+                    نتبع منهجية واضحة ومنظمة لضمان تحقيق أفضل النتائج وتجربة استثنائية لعملائنا.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="group relative fade-in-up" style="animation-delay: 0.1s;">
+                    <div
+                        class="relative bg-gray-50 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 group-hover:border-purple-200">
+                        <div
+                            class="absolute -top-6 left-6 w-12 h-12 bg-gradient-to-br from-amber-500 to-pink-500 rounded-full text-white font-bold flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            01</div>
+                        <div
+                            class="w-14 h-14 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 mt-4">
+                            <i class="fas fa-comments text-2xl text-white"></i>
+                        </div>
+                        <h5
+                            class="text-xl font-bold text-gray-800 mb-3 group-hover:text-purple-600 transition-colors duration-300">
+                            الاستشارة الأولية</h5>
+                        <p class="text-gray-600 leading-relaxed">نلتقي بك لفهم احتياجاتك ورؤيتك للمشروع ونضع الخطة
+                            الأولية.</p>
+                    </div>
+                </div>
+                <div class="group relative fade-in-up" style="animation-delay: 0.2s;">
+                    <div
+                        class="relative bg-gray-50 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 group-hover:border-purple-200">
+                        <div
+                            class="absolute -top-6 left-6 w-12 h-12 bg-gradient-to-br from-amber-500 to-pink-500 rounded-full text-white font-bold flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            02</div>
+                        <div
+                            class="w-14 h-14 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 mt-4">
+                            <i class="fas fa-palette text-2xl text-white"></i>
+                        </div>
+                        <h5
+                            class="text-xl font-bold text-gray-800 mb-3 group-hover:text-indigo-600 transition-colors duration-300">
+                            التصميم والألوان</h5>
+                        <p class="text-gray-600 leading-relaxed">نضع التصميم المفصل مع اختيار الألوان والمواد المناسبة.
+                        </p>
+                    </div>
+                </div>
+                <div class="group relative fade-in-up" style="animation-delay: 0.3s;">
+                    <div
+                        class="relative bg-gray-50 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 group-hover:border-purple-200">
+                        <div
+                            class="absolute -top-6 left-6 w-12 h-12 bg-gradient-to-br from-amber-500 to-pink-500 rounded-full text-white font-bold flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            03</div>
+                        <div
+                            class="w-14 h-14 bg-gradient-to-r from-rose-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 mt-4">
+                            <i class="fas fa-shopping-cart text-2xl text-white"></i>
+                        </div>
+                        <h5
+                            class="text-xl font-bold text-gray-800 mb-3 group-hover:text-rose-600 transition-colors duration-300">
+                            التسوق والشراء</h5>
+                        <p class="text-gray-600 leading-relaxed">نتولى شراء جميع المواد والأثاث المطلوب بأفضل الأسعار.
+                        </p>
+                    </div>
+                </div>
+                <div class="group relative fade-in-up" style="animation-delay: 0.4s;">
+                    <div
+                        class="relative bg-gray-50 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 group-hover:border-purple-200">
+                        <div
+                            class="absolute -top-6 left-6 w-12 h-12 bg-gradient-to-br from-amber-500 to-pink-500 rounded-full text-white font-bold flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            04</div>
+                        <div
+                            class="w-14 h-14 bg-gradient-to-r from-teal-500 to-green-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 mt-4">
+                            <i class="fas fa-hammer text-2xl text-white"></i>
+                        </div>
+                        <h5
+                            class="text-xl font-bold text-gray-800 mb-3 group-hover:text-teal-600 transition-colors duration-300">
+                            التنفيذ والتسليم</h5>
+                        <p class="text-gray-600 leading-relaxed">ننفذ التصميم بدقة عالية ونسلمك منزلك جاهزاً.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+
+    <section class="bg-gradient-to-r from-amber-500 to-orange-500  p-8 md:p-12 shadow-2xl relative overflow-hidden">
+        <div class="absolute inset-0 opacity-1">
+            <div class="absolute top-0 left-0 w-32 h-32 bg-white rounded-full -translate-x-16 -translate-y-16">
+            </div>
+            <div class="absolute bottom-0 right-0 w-40 h-40 bg-white rounded-full translate-x-20 translate-y-20">
+            </div>
+        </div>
+        <div class="text-center fade-in-up" style="animation-delay: 0.1s;">
+            <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                جاهز لتصميم مطبخ أحلامك ؟
+            </h3>
+            <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+                احصل على استشارة مجانية وتصميم ثلاثي الأبعاد لمطبخك اليوم
+
+            </p>
+            <a href="tel:+966530040180"  target="_blank"
+                class="inline-flex items-center justify-center px-8 py-4 bg-white text-purple-600 font-bold rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300 group">
+                <i class="fab fa-whatsapp ml-2 group-hover:scale-110 transition-transform duration-300"></i>
+                ابدأ مشروعك الآن
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+ <footer class="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white relative overflow-hidden">
+        <div class="container mx-auto px-4 lg:px-8 relative z-10">
+            <div class="py-16">
+                <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-8">
+                    <div class="lg:col-span-2">
+                        <div class="flex items-center space-x-3 space-x-reverse mb-6">
+                            <div
+                                class="w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
+                                <i class="fas fa-home-heart text-white text-2xl"></i>
+                            </div>
+                            <div>
+                                <span class="text-3xl font-bold gradient-text">هدير</span>
+                                <div class="text-sm text-gray-400 font-medium"> الأشياء الذكية والديكورات والمطابخ</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 leading-relaxed mb-6 max-w-md ">
+                            <i class="fas fa-location-dot ml-1 text-blue-500"></i>
+                            الرياض - حي قرناطة - شارع الأمير نايف
+                        </p>
+                        <div class="flex space-x-4 space-x-reverse">
+                            <a href="https://wa.me/+966530040180" target="_blank"
+                                class="w-12 h-12 bg-green-500 hover:bg-green-600 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 group"><i
+                                    class="fab fa-whatsapp text-white group-hover:scale-110 transition-transform duration-300"></i></a>
+                            <a href="https://instagram.com/Sttc_hadeer" target="_blank"
+                                class="w-12 h-12 bg-gradient-to-r from-pink-500 to-purple-500 hover:from-purple-500 hover:to-pink-500 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 group"><i
+                                    class="fab fa-instagram text-white group-hover:scale-110 transition-transform duration-300"></i></a>
+                            <a href="tel:+966530040180" target="_blank"
+                                class="w-12 h-12 bg-blue-500 hover:bg-blue-600 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 group"><i
+                                    class="fas fa-phone text-white group-hover:scale-110 transition-transform duration-300"></i></a>
+                            <a href="mailto:Sttc.hadeer@gmail.com" target="_blank"
+                                class="w-12 h-12 bg-amber-500 hover:bg-amber-600 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 group"><i
+                                    class="fas fa-envelope text-white group-hover:scale-110 transition-transform duration-300"></i></a>
+                        </div>
+                    </div>
+                    <div>
+                        <h5 class="text-xl font-bold mb-6 text-white">روابط سريعة</h5>
+                        <ul class="space-y-3">
+                            <li><a href="../index.html"
+                                    class="text-gray-300 hover:text-amber-400 transition-colors duration-300 flex items-center group"><i
+                                        class="fas fa-chevron-left text-amber-500 ml-2 text-xs group-hover:translate-x-1 transition-transform duration-300"></i>
+                                    الرئيسية</a></li>
+                            <li><a href="../index.html#services"
+                                    class="text-gray-300 hover:text-amber-400 transition-colors duration-300 flex items-center group"><i
+                                        class="fas fa-chevron-left text-amber-500 ml-2 text-xs group-hover:translate-x-1 transition-transform duration-300"></i>
+                                    خدماتنا</a></li>
+                            <li><a href="../index.html#gallery"
+                                    class="text-gray-300 hover:text-amber-400 transition-colors duration-300 flex items-center group"><i
+                                        class="fas fa-chevron-left text-amber-500 ml-2 text-xs group-hover:translate-x-1 transition-transform duration-300"></i>
+                                    معرض الأعمال</a></li>
+                            <li><a href="../index.html#about"
+                                    class="text-gray-300 hover:text-amber-400 transition-colors duration-300 flex items-center group"><i
+                                        class="fas fa-chevron-left text-amber-500 ml-2 text-xs group-hover:translate-x-1 transition-transform duration-300"></i>
+                                    من نحن</a></li>
+                            <li><a href="../index.html#contact"
+                                    class="text-gray-300 hover:text-amber-400 transition-colors duration-300 flex items-center group"><i
+                                        class="fas fa-chevron-left text-amber-500 ml-2 text-xs group-hover:translate-x-1 transition-transform duration-300"></i>
+                                    تواصل معنا</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="text-xl font-bold mb-6 text-white">خدماتنا</h5>
+                        <ul class="space-y-3">
+                            <li><a href="kitchens.html"
+                                    class="text-gray-300 hover:text-amber-400 transition-colors duration-300 flex items-center group"><i
+                                        class="fas fa-utensils text-amber-500 ml-2 text-xs"></i> تصميم المطابخ</a></li>
+                            <li><a href="dicor.html"
+                                    class="text-gray-300 hover:text-amber-400 transition-colors duration-300 flex items-center group"><i
+                                        class="fas fa-palette text-purple-500 ml-2 text-xs"></i> الديكورات المنزلية</a>
+                            </li>
+                            <li><a href="#"
+                                    class="text-gray-300 hover:text-amber-400 transition-colors duration-300 flex items-center group"><i
+                                        class="fas fa-home text-blue-500 ml-2 text-xs"></i> الأشياء الذكية</a></li>
+                            <li><a href="../index.html#contact"
+                                    class="text-gray-300 hover:text-amber-400 transition-colors duration-300 flex items-center group"><i
+                                        class="fas fa-comments text-green-500 ml-2 text-xs"></i> الاستشارات المجانية</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 py-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="text-gray-400 text-sm mb-4 md:mb-0">
+                        © 2024 هدير الأشياء الذكية . جميع الحقوق محفوظة.
+                    </div>
+                    <div class="flex items-center space-x-6 space-x-reverse text-sm">
+                        <div class="flex items-center text-gray-400">
+                            <span class="text-gray-400  transition-colors duration-300 flex items-center group">
+                                تصميم وتطوير / أيمن جعدان
+                            </span>
+                            <i class="fas fa-laptop-code text-gray-400 mx-2"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button id="scrollToTop"
+            class="fixed bottom-8 left-8 w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-full shadow-lg hover:shadow-2xl hover:scale-110 transition-all duration-300 opacity-0 invisible z-50">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+    </footer>
+
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger-menu');
+
+            mobileMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        // Mobile Dropdown Toggle
+        function toggleMobileDropdown() {
+            const dropdown = document.getElementById('mobileDropdown');
+            const icon = document.getElementById('dropdownIcon');
+
+            dropdown.classList.toggle('active');
+            icon.classList.toggle('rotate-180');
+        }
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function () {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    const mobileMenu = document.getElementById('mobileMenu');
+                    const hamburger = document.querySelector('.hamburger-menu');
+                    if (mobileMenu.classList.contains('active')) {
+                        mobileMenu.classList.remove('active');
+                        hamburger.classList.remove('active');
+                    }
+                }
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function (e) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const navbar = document.getElementById('navbar');
+            if (!navbar.contains(e.target) && mobileMenu.classList.contains('active')) {
+                mobileMenu.classList.remove('active');
+                document.querySelector('.hamburger-menu').classList.remove('active');
+            }
+        });
+
+        // Image Modal Functions
+        function openImageModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            modalImage.src = imageSrc;
+            modal.classList.remove('opacity-0', 'invisible');
+            modal.classList.add('opacity-100', 'visible');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.add('opacity-0', 'invisible');
+            modal.classList.remove('opacity-100', 'visible');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('imageModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeImageModal();
+            }
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeImageModal();
+            }
+        });
+
+        // Scroll to Top Button
+        window.addEventListener('scroll', function () {
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.remove('opacity-0', 'invisible');
+                scrollToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                scrollToTopBtn.classList.add('opacity-0', 'invisible');
+                scrollToTopBtn.classList.remove('opacity-100', 'visible');
+            }
+        });
+
+        document.getElementById('scrollToTop').addEventListener('click', function () {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+
+</html>
