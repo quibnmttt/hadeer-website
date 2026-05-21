@@ -3,7 +3,7 @@
 الموقع الإلكتروني الرسمي والتعريفي لشركة هدير، تم تصميمه وتطويره لتقديم هوية الشركة الرقمية، استعراض محفظة أعمالهم، وعرض الخدمات والمشاريع بشكل احترافي وجذاب للعملاء.
 
 <p align="center">
-  <a href="https://celadon-panda-b64394.netlify.app/" target="_blank">
+  <a href="https://quibnmttt.github.io/hadeer-website/" target="_blank">
     <img src="https://img.shields.io/badge/Live_Demo-معاينة_الموقع_الحي-blue?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Live Demo" />
   </a>
 </p>
@@ -32,7 +32,7 @@
 
 ## 🔗 رابط المعاينة السريعة (Deployment)
 
-> **ملاحظة للمراجعين:** الموقع مرفوع ومتاح للمعاينة الفورية كنسخة حية عبر منصة Netlify من خلال الرابط التالي: [اضغط هنا لزيارة الموقع](https://celadon-panda-b64394.netlify.app/)
+> **ملاحظة للمراجعين:** الموقع مرفوع ومتاح للمعاينة الفورية كنسخة حية عبر منصة Netlify من خلال الرابط التالي: [اضغط هنا لزيارة الموقع](https://quibnmttt.github.io/hadeer-website/)
 
 ---
 <p align="center">
